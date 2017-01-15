@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 // Dados da conexão com o banco de dados
 define('SERVER', '79.170.44.156');
 define('DBNAME', 'cl36-rickpara');
@@ -11,50 +11,54 @@ $parametro = (isset($_GET['parametro'])) ? $_GET['parametro'] : '';
 
 // Configura uma conexão com o banco de dados
 $opcoes = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8');
-$conexao = new PDO("mysql:host=".SERVER."; dbname=".DBNAME, USER, PASSWORD, $opcoes);
+$conexao = new PDO("mysql:host=" . SERVER . "; dbname=" . DBNAME, USER, PASSWORD, $opcoes);
 
 // Verifica se foi solicitado uma consulta para o autocomplete
-if($acao == 'autocomplete'):
-	$where = (!empty($parametro)) ? 'WHERE codigo_item LIKE ?' : '';
-	$sql = "SELECT codigo_item, descricao_item, aliq_ipi, ncm FROM base_prod " . $where;
+if ($acao == 'autocomplete'):
+    $where = (!empty($parametro)) ? 'WHERE codigo_item LIKE ?' : '';
+    $sql = "SELECT codigo_item, descricao_item, aliq_ipi, ncm FROM base_prod " . $where;
 
 
 
-$stm = $conexao->prepare($sql);
-$stm->bindValue(1, $parametro.'%');
-$stm->execute();
-$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+    $stm = $conexao->prepare($sql);
+    $stm->bindValue(1, $parametro . '%');
+    $stm->execute();
+    $dados = $stm->fetchAll(PDO::FETCH_OBJ);
 
-$json = json_encode($dados);
-echo $json;
+    $json = json_encode($dados);
+    echo $json;
 endif;
 
 // Verifica se foi solicitado uma consulta para preencher os campos do formulário
-	if($acao == 'consulta'):
-		$sql = "SELECT codigo_item, descricao_item, aliq_ipi, ncm FROM base_prod ";
-	$sql .= "WHERE codigo_item LIKE ? LIMIT 1";
+if ($acao == 'consulta'):
+    $sql = "SELECT codigo_item, descricao_item, aliq_ipi, ncm FROM base_prod ";
+    $sql .= "WHERE codigo_item LIKE ? LIMIT 1";
 
-	$stm = $conexao->prepare($sql);
-	$stm->bindValue(1, $parametro.'%');
-	$stm->execute();
-	$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+    $stm = $conexao->prepare($sql);
+    $stm->bindValue(1, $parametro . '%');
+    $stm->execute();
+    $dados = $stm->fetchAll(PDO::FETCH_OBJ);
 
-	$json = json_encode($dados);
-	echo $json;
-	endif;
+    $json = json_encode($dados);
+    echo $json;
+endif;
 
 // Verifica se foi solicitado uma consulta para preencher o mva
-	if($acao == 'consulta'):
-	$sqlz = "SELECT ncm, rs, sc, sc_simples, rj, mg, mt, ap FROM nmcMVA " . $where;	
-	$sqlz .= "WHERE ncm LIKE ? LIMIT 1";
+//Manu!!! De novo voce colocou o mesmo nome na parada??? 
+// Isso aqui nao eh Java nao maluco!!!
+//Method Overloading??? Escquece!! Isso nao existe em PHP, nem JavaScipt
+// He-llow!
+if ($acao == 'consultaPorNCM'):
+    $sqlz = "SELECT ncm, rs, sc, sc_simples, rj, mg, mt, ap FROM nmcMVA " . $where;
+    $sqlz .= "WHERE ncm LIKE ? LIMIT 1";
 
-	$stm = $conexao->prepare($sqlz);
-	$stm->bindValue(1, $parametro.'%');
-	$stm->execute();
-	$dados = $stm->fetchAll(PDO::FETCH_OBJ);
+    $stm = $conexao->prepare($sqlz);
+    $stm->bindValue(1, $parametro . '%');
+    $stm->execute();
+    $dados = $stm->fetchAll(PDO::FETCH_OBJ);
 
-	$json = json_encode($dados);
-	echo $json;
+    $json = json_encode($dados);
+    echo $json;
 	endif;
 
 		
