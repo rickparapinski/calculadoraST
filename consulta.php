@@ -18,8 +18,6 @@ if ($acao == 'autocomplete'):
     $where = (!empty($parametro)) ? 'WHERE codigo_item LIKE ?' : '';
     $sql = "SELECT codigo_item, descricao_item, aliq_ipi, ncm FROM base_prod " . $where;
 
-
-
     $stm = $conexao->prepare($sql);
     $stm->bindValue(1, $parametro . '%');
     $stm->execute();
