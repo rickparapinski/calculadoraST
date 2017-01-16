@@ -4,7 +4,7 @@ $(function () {
         minLength: 2,
         source: function (request, response) {
             $.ajax({
-                url: "consulta.php",
+                url: "/model/consulta.php",
                 dataType: "json",
                 data: {
                     acao: 'autocomplete',
@@ -42,7 +42,7 @@ $(function () {
 var buscarMVA = function (ncm) {
     $('#mva').val("BUSCANDO MVA...");
     $.ajax({
-        url: "consulta.php",
+        url: "/model/consulta.php",
         dataType: "json",
         data: {
             acao: 'consultaPorNCM',
