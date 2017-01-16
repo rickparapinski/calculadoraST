@@ -47,8 +47,8 @@ endif;
 //Method Overloading??? Escquece!! Isso nao existe em PHP, nem JavaScipt
 // He-llow!
 if ($acao == 'consultaPorNCM'):
-    $sqlz = "SELECT ncm, rs, sc, sc_simples, rj, mg, mt, ap FROM nmcMVA " . $where;
-    $sqlz .= "WHERE ncm LIKE ? LIMIT 1";
+    $sqlz = "SELECT * FROM mva " . $where;
+    $sqlz .= "WHERE ncm = ? LIMIT 1";
 
     $stm = $conexao->prepare($sqlz);
     $stm->bindValue(1, $parametro . '%');
