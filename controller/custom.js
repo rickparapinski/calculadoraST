@@ -49,11 +49,13 @@ var buscarMVA = function (ncm) {
             parametro: ncm
         },
         success: function (data) {
-            $('#mva').val("MVA ENCONTRADO!");
+            
             if (data[0]) {
-                var mva = data[0].rs;
+                var mva = data[0].valor;
                 var mvaPercentual = (mva * 100).toFixed(2) + '%';
                 $('#mva').val(mvaPercentual);
+            } else {
+                $('#mva').val("MVA INEXISTENTE PARA O NCM: " + ncm);
             }
         },
         error: function (data) {
