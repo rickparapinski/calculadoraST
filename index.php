@@ -9,8 +9,13 @@ http://www.greatapps4you.com.br
         <meta charset="UTF-8">
         <title>Calculadora ST</title>
         <meta charset="UTF-8">
+
     </head>
     <body>
         <a href="/calc-st.html"><h1>CALCULADORA ST</h1></a>
+
+        <div id="scriptMva"></div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="/gerar-script-mva.js"></script>
     </body>
 </html>
