@@ -9,6 +9,9 @@ define('PASSWORD', 'dUgkf-/d4');
 $acao = (isset($_GET['acao'])) ? $_GET['acao'] : '';
 $parametro = (isset($_GET['parametro'])) ? $_GET['parametro'] : '';
 
+$ncm = (isset($_GET['ncm'])) ? $_GET['ncm'] : '';
+$estado = (isset($_GET['estado'])) ? $_GET['estado'] : '';
+
 // Configura uma conexão com o banco de dados
 $opcoes = array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8');
 $conexao = new PDO("mysql:host=" . SERVER . "; dbname=" . DBNAME, USER, PASSWORD, $opcoes);
@@ -41,22 +44,19 @@ if ($acao == 'consulta'):
     echo $json;
 endif;
 
-// Verifica se foi solicitado uma consulta para preencher o mva
-//Manu!!! De novo voce colocou o mesmo nome na parada??? 
-// Isso aqui nao eh Java nao maluco!!!
-//Method Overloading??? Escquece!! Isso nao existe em PHP, nem JavaScipt
-// He-llow!
 if ($acao == 'consultaPorNCM'):
-    $sqlz = "SELECT * FROM mva " . $where;
-    $sqlz .= "WHERE ncm = ? LIMIT 1";
-
+    $sqlz = "SELECT T1.ncm, T1.valor, T1.estado, T2.sigla, T2.nome, T2.aliq_interna FROM mva T1 INNER JOIN estados T2 ON T2.id = T1.estado WHERE T1.ncm = ? AND T1.estado = ?";
     $stm = $conexao->prepare($sqlz);
-    $stm->bindValue(1, $parametro . '%');
+    $stm->bindValue(1, $ncm . '%');
+    $stm->bindValue(2, $estado . '%');
     $stm->execute();
     $dados = $stm->fetchAll(PDO::FETCH_OBJ);
 
     $json = json_encode($dados);
     echo $json;
-	endif;
-
-		
+    //echo $sqlz;
+	endif;	
+        
+      //select * from base_prod where `codigo_item` = 'A135-127'
+      //NCM: 85081900 
+      //SELECT FROM mva T1 INNER JOIN base_prod T2 ON T1.ncm = T2.mcm INNER JOIN T1 ON estados T3.id = T1.estado WHERE T1.ncm = '85081900'

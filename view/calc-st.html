@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <link href="/view/css/styles.css" rel="stylesheet" />
-     
+
     </head>
     <body>
         <h1>Calculadora de ST</h1>
@@ -23,72 +23,45 @@
             <p><span class="labelFake">Descrição: </span><input type="text" id="descricao" style="width: 200px;" disabled></p>
             <p><span class="labelFake">Alíquota de IPI: </span><input type="text" id="aliqIPI" disabled></p>
             <p><span class="labelFake" style="">NCM: </span><input type="text" id="ncm" disabled></p>
-            <p><span class="labelFake">Estado de destino: </span><select>
-                    <option selected>Selecione</option>
-                    <option>Acre</option>
-                    <option>Alagoas</option>
-                    <option>Amapá</option>
-                    <option>Amazonas</option>
-                    <option>Bahia</option>
-                    <option>Ceará</option>
-                    <option>Distrito Federal</option>
-                    <option>Espírito Santo</option>
-                    <option>Goiás</option>
-                    <option>Maranhão</option>
-                    <option>Mato Grosso</option>
-                    <option>Mato Grosso do Sul</option>
-                    <option>Minas Gerais</option>
-                    <option>Pará</option>
-                    <option>Paraíba</option>
-                    <option>Paraná</option>
-                    <option>Pernambuco</option>
-                    <option>Piauí</option>
-                    <option>Rio de Janeiro</option>
-                    <option>Rio Grande do Norte</option>
-                    <option>Rio Grande do Sul</option>
-                    <option>Rondônia</option>
-                    <option>Roraima</option>
-                    <option>Santa Catarina</option>
-                    <option>São Paulo</option>
-                    <option>Sergipe</option>
-                    <option>Tocantins</option>
+            <p><span class="labelFake">Estado de destino: </span>
+                <select id="estados">
+                    <option value = 1>Acre</option>
+                    <option value = 2>Alagoas</option>
+                    <option value = 4>Amapá</option>
+                    <option value = 3>Amazonas</option>
+                    <option value = 5>Bahia</option>
+                    <option value = 6>Ceará</option>
+                    <option value = 7>Distrito Federal</option>
+                    <option value = 8>Espírito Santo</option>
+                    <option value = 9>Goiás</option>
+                    <option value = 10>Maranhão</option>
+                    <option value = 13>Mato Grosso</option>
+                    <option value = 12>Mato Grosso do Sul</option>
+                    <option value = 11>Minas Gerais</option>
+                    <option value = 14>Pará</option>
+                    <option value = 15>Paraíba</option>
+                    <option value = 18 selected>Paraná</option>
+                    <option value = 16>Pernambuco</option>
+                    <option value = 17>Piauí</option>
+                    <option value = 19>Rio de Janeiro</option>
+                    <option value = 20>Rio Grande do Norte</option>
+                    <option value = 23>Rio Grande do Sul</option>
+                    <option value = 21>Rondônia</option>
+                    <option value = 22>Roraima</option>
+                    <option value = 24>Santa Catarina</option>
+                    <option value = 26>São Paulo</option>
+                    <option value = 25>Sergipe</option>
+                    <option value = 27>Tocantins</option>
                 </select>
             </p>
             <p><span class="labelFake">MVA: </span><input type="text" id="mva" disabled></p>
             <p><span class="labelFake">Valor do produto </span><input type="text" id="vm"></p>
             <p><span class="labelFake" style="">valor da ST </span><input type="text" id="valST" disabled></p>
             <p><span class="labelFake" style="">Total do produto </span><input type="text" id="valTotal" disabled></p>
-            <button id="calculo">Calcular</button>
+            <button id="calcular">Calcular</button>
         </div>
 
-        <script type="text/javascript">
-
-            $(document).ready(function () {
-
-                $("input[type=radio][name=perfilCliente]").click(function () {
-                    var consuFinal = $("input[type=radio][name=perfilCliente]:checked").val();
-                    if (consuFinal == "consFinal") {
-                        alert("ATENÇÃO: Não se aplica recolhimento de ICMS ST para consumidor final ");
-                        $("#segundaParte").css("display", "none");
-                    } else if (consuFinal == "revenda") {
-                        $("#segundaParte").css("display", "block");
-                    }
-                });
-            });
-
-            $("#calculo").click(function () {
-                var valorMercadoria = $("#vm").val();
-                var valorProduto = valorMercadoria * $(aliqIPI).val() + parseFloat(valorMercadoria);
-                var bcST = valorProduto * $('#mva') /*mva não em percentual*/ + parseFloat(valorProduto);
-                var icmsP =  valorMercadoria * /*icms estadual que ta no sql tabela estado*/;
-                var icmsSt = bcST * /*icms estadual que ta no sql tabela estado*/;
-                var stAPagar = icmsSt - icmsP;
-                var total = valorProduto + parseFloat(stAPagar);
-                $('#valST').html(stAPagar);
-                $('#valTotal').html(total);
-            });
-        </script>
         <script type="text/javascript" src="/controller/custom.js"></script>
-        
+
     </body>
 </html>

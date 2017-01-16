@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-#mva{
-    width: 200px;
-}
-
-.labelFake {
-    font-weight: bold;
-}
-
-#segundaParte {
-    display: none;
-}
-
-=======
 /*
 GreatApps4YOU ® Copyright © 2016.
 All rights reserved.
@@ -23,7 +9,7 @@ http://www.greatapps4you.com.br
 */
 
 #mva{
-    width: 300px;
+    width: 200px;
 }
 
 .labelFake {
@@ -33,5 +19,3 @@ http://www.greatapps4you.com.br
 #segundaParte {
     display: none;
 }
-
->>>>>>> afbf6b8b4a27c915ad675fd4195673bbd3a16f08
